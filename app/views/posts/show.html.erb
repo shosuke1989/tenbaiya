@@ -1,5 +1,7 @@
 <div class="main posts-show">
   <div class="container">
+  <h1 class="form-heading">SMS送信</h1>
+
     <div class="posts-show-item">
       <p>商品名</p>
       <p><%=@post.content %></p>
@@ -17,6 +19,7 @@
 
           <input type="submit" value="送信">
           <p>※ハイフン(-)なしで入力</p>
+          <p>記入した電話番号にSMSを送信します</p>
         </div>
       </div>
     <% end %>
