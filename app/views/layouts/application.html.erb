@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TenbaIya</title>
+    <title>Tenba×Iya</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,26 @@
   </head>
 
   <body>
-    <%= yield %>
+
+  <header>
+  <div class="header-logo">
+    <%=link_to("Tenba×Iya","/")%>
+  </div>
+  <ul class="header-menus">
+    <li><%=link_to("Tenba×Iyaとは","/about")%></li>
+    <li><%=link_to("商品一覧","/posts/index")%></li>
+    <li><%= link_to("商品登録", "/posts/new")%></li>
+    <li><%= link_to("チケット検索", "/posts/find")%></li>
+  </ul>
+</header>
+
+<% if flash[:notice] %>
+<div class="flash">
+  <%= flash[:notice] %>
+</div>
+<% end %>
+
+
+<%= yield %>
   </body>
 </html>
