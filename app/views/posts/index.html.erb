@@ -3,31 +3,27 @@
     <h1 class="form-heading">商品検索</h1>
     <%= form_tag("/posts/index") do %>
       <div class="form">
-        <input name="content">
-        <input type="submit" value="検索">
+        <div class="form-body">
+          <input name="content">
+          <input type="submit" value="検索">
+        </div>
       </div>
     <% end %>
   </div>
-
-<div class="container">
-<h1 class="form-heading">商品検索</h2>
-
-<p>商品名</p>
-  <% @posts.each do |post| %>
-    <div class="posts-index-item">
-    <%= link_to(post.content,"/posts/#{post.id}") %>
-    
-    </div>
-  <% end %>
-  <p>
-  登録
-  </p>
+  <div class="container">
+    <h1 class="form-heading">商品名</h1>
+    <% @posts.each do |post| %>
+      <div class="posts-index-item">
+        <%= link_to(post.content,"/posts/#{post.id}") %>
+      </div>
+    <% end %>
+  <p>登録</p>
     <% @ticket.each do |ticket| %>
       <div class="posts-index-item">
-      <%= ticket.id %>
-      <%= ticket.post_id %>
-      <%= ticket.phonenumber %>
-      <%= ticket.ticket_id %>
+        <%= ticket.id %>
+        <%= ticket.post_id %>
+        <%= ticket.phonenumber %>
+        <%= ticket.ticket_id %>
       </div>
     <% end %>
   </div>
