@@ -56,10 +56,10 @@ class PostsController < ApplicationController
       if @ticket.save
         redirect_to("/posts/#{@ticket.id}/ticket")
       else
-        すでに登録されています。
+        #すでに登録されています。
       end
     else
-      IDが違います
+      #IDが違います
     end
   end
 
