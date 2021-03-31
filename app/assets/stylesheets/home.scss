@@ -1,3 +1,6 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 /* reset ================================ */
 * {
     box-sizing: border-box;
@@ -78,7 +81,7 @@
   
   .header-logo a{
     color: white;
-    font-size: 22px;
+    font-size: 30px;
   }
   
   .header-menus {
@@ -96,7 +99,7 @@
   
   .header-menus a {
     float: left;
-    font-size: 13px;
+    font-size: 20px;
     color: white;
   }
   
@@ -144,6 +147,11 @@
   
   .top-main p {
     font-size: 24px;
+  }
+
+  .top-main li a {
+    font-size: 24px;
+    color: white;
   }
   
   /* about ================================ */
