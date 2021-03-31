@@ -1,0 +1,24 @@
+<div class="main posts-show">
+  <div class="container">
+    <div class="posts-show-item">
+      <p>商品名</p>
+      <p><%=@post.content %></p>
+    </div>
+    <%= form_tag("/posts/#{@post.id}/sending") do %>
+      <div class="form">
+        <div class="form-body">
+          <% @post.errors.full_messages.each do |message| %>
+            <div class="form-error">
+              <%= message %>
+            </div>
+          <% end %>
+          <p>電話番号</p>
+          <input name="phonenumber" value="">
+
+          <input type="submit" value="送信">
+          <p>※ハイフン(-)なしで入力</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

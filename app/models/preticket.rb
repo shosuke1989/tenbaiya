@@ -1,0 +1,2 @@
+class Preticket < ApplicationRecord
+end
