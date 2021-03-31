@@ -2,19 +2,20 @@
   <div class="container">
     <div class="posts-show-item">
     <p>商品名</p>
-    <p><%=@post.content%></p>
+    <p>　<%=@post.content%></p>
     <p>商品購入回数</p>
+    <p>　<%=1%></p>
     <p>過去2ヶ月の商品購入回数</p>
-
+    <p>　<%=1%></p>
     <p>電話番号</p>
-    <p><%="***-****-**#{@ticket.phonenumber.to_s[8,2]}"%></p>
-    <p>確認ID</p>
-    <p><%=@ticket.ticket_id%></p>
-    <p>チケット取得日</p>
-    <p><%=@ticket.created_at.in_time_zone('Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分%-S秒")%></p>
+    <p><%="　＊＊＊-＊＊＊＊-＊＊#{@ticket.phonenumber.to_s[8,2]}"%></p>
+    <p>チケットID</p>
+    <p>　<%=@ticket.ticket_id%></p>
+    <p>チケット発行日</p>
+    <p>　<%=@ticket.created_at.in_time_zone('Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分%-S秒")%></p>
     <%if @ticket.used==1%>
     <p>チケット使用日</p>
-    <p><%=@ticket.updated_at.in_time_zone('Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分%-S秒")%></p>
+    <p>　<%=@ticket.updated_at.in_time_zone('Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分%-S秒")%></p>
     チケット使用済み
 
     <%else%>
