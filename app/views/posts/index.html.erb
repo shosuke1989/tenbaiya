@@ -16,6 +16,7 @@
     <% @posts.each do |post| %>
       <div class="posts-index-item">
         <%= link_to(post.content,"/posts/#{post.id}") %>
+        <p>(123)</p>
       </div>
     <% end %>
   <p>登録</p>
