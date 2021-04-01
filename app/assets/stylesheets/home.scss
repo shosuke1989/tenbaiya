@@ -21,7 +21,7 @@
   a {
     text-decoration: none;
     color: #2d3133;
-    font-size: 40px;
+    font-size: 30px;
   }
   
   h1, h2, h3, h4, h5, h6, p {
@@ -65,7 +65,7 @@
   }
   
   .container {
-    max-width: 600px;
+    max-width: 1000px;
     margin: 60px auto;
     padding-left: 15px;
     padding-right: 15px;
@@ -186,7 +186,7 @@
   
   /* フォーム================================ */
   .form {
-    max-width: 600px;
+    max-width: 1000px;
     margin: 0 auto;
     background-color: white;
     box-shadow: 0 2px 6px #c1ced7;
@@ -264,7 +264,7 @@
     font-size: 45px;
     color: white;
   }
-  
+
   .ticket-button button{
   background-color: #3ecdc6;
   font-weight: 300;
@@ -277,3 +277,7 @@
     border-radius: 2px;
     margin: 30px auto
     }  
+
+  left{
+
+  }
