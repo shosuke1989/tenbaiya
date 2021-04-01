@@ -23,8 +23,14 @@
     チケット使用済み
 
     <%else%>
+
+    <div class="ticket-button">
     <%= link_to("チケットを使う","/posts/#{@ticket.id}/used",{method: "post"}) %>
     <%end%>
+    </div>
+
+
+    
 
 
     </div>
