@@ -260,10 +260,21 @@
     font-size: 45px;
     color: white;
   }
+  .ticket-button-used a{
+    font-size: 45px;
+    color: white;
+  }
+
 
   .ticket-button button{
   background-color: #3ecdc6;
   font-weight: 300;
   border-radius: 2px;
   margin: 30px auto
-  }
+  }  
+  .ticket-button-used button{
+    background-color: gray;
+    font-weight: 300;
+    border-radius: 2px;
+    margin: 30px auto
+    }  
