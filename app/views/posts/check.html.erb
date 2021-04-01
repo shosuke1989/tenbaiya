@@ -1,14 +1,14 @@
 <div class="main posts-show">
   <div class="container">
+  <h1 class="form-heading">チケットID入力</h1>
+
     <div class="posts-show-item">
     <p>商品名</p>
-    <p>
-    <%=@post.content %>
-    </p>
+    <p1>　<%=@post.content %></p1>
     <p>電話番号</p>
-    <p><%=@phonenumber %></p>
+    <p1>　<%=@phonenumber %></p1>
     <p>チケットID＊最終的には表示しない</p>
-    <p><%=@ticket_id.ticket_id %></p>
+    <p1>　<%=@ticket_id.ticket_id %></p1>
     </div>
     <%= form_tag("/posts/#{@post.id}/#{@phonenumber}/#{@ticket_id.ticket_id}/input") do %>
     <div class="form">
@@ -18,9 +18,7 @@
             <%= message %>
           </div>
         <% end %>
-        <p>
-        確認コード
-      </p>
+        <p>チケットID</p>
       <input name="ticket_id" value="<%=@ticket_id.ticket_id %>">
       <input type="submit" value="確定">
       </div>
