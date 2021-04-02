@@ -5,7 +5,8 @@
       <p>商品名</p>
       <p1>　<%=@post.content %></p1>
       <p>販売数</p>
-      <p1>　123個</p1>
+      <p1>　<%= @post_count%>個</p1>
+
 
     </div>
     <%= form_tag("/posts/#{@post.id}/sending") do %>
