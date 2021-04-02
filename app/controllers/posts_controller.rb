@@ -68,7 +68,8 @@ class PostsController < ApplicationController
     @post=Post.find_by(id: @ticket.post_id)
     @count_all=Ticket.where(post_id:@ticket.post_id,phonenumber:@ticket.phonenumber).count
     day=Date.today.to_s[0,7]
-    @count_month=Ticket.where(post_id:@ticket.post_id,phonenumber:@ticket.phonenumber).where('created_at like ?',"#{day}%").count
+    @count_month=Ticket.where(post_id:@ticket.post_id,phonenumber:@ticket.phonenumber).where('created_at like ?',"%#{day}%")
+
   end
 
   def used
