@@ -1,7 +1,7 @@
 class CreateTickets < ActiveRecord::Migration[6.0]
   def change
     create_table :tickets do |t|
-      t.string :post_id
+      t.integer :post_id
       t.string :ticket_id
       t.string :phonenumber
       t.integer :used

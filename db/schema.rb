@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_03_31_071855) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string "post_id"
+    t.integer "post_id"
     t.string "ticket_id"
     t.string "phonenumber"
     t.integer "used"
