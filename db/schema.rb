@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_03_31_071855) do
   create_table "tickets", force: :cascade do |t|
     t.string "post_id"
     t.string "ticket_id"
-    t.integer "phonenumber"
+    t.string "phonenumber"
     t.integer "used"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
