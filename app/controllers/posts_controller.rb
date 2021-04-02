@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     #@posts=Post.left_joins(:tickets).group(:content).select("posts.content,posts.id AS id,COUNT(`tickets`.`id`) AS tickets_count").where('content like ?',"%#{params[:content]}%").order(tickets_count: :desc)
     #@posts=Post.left_joins(:buys).where('created_at like ?',"%#{params[:content]}%")
     #@posts=Post.where("created_at like ?","2021-03-31%")
-    @posts=Post.all
+    @posts=Post.all.where('content like ?',"%#{params[:content]}%")
   end
 
   def show
