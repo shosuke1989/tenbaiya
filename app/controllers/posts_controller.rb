@@ -2,10 +2,10 @@ class PostsController < ApplicationController
 
   def index
     @ticket = Ticket.all.order(created_at: :desc)
-    #@posts=Post.left_joins(:tickets).group(:content).select("posts.content,posts.id AS id,COUNT(`tickets`.`id`) AS tickets_count").where('content like ?',"%#{params[:content]}%").order(tickets_count: :desc)
+    @posts=Post.left_joins(:tickets).group(:content).select("posts.content,posts.id AS id,COUNT(`tickets`.`id`) AS tickets_count").where('content like ?',"%#{params[:content]}%").order(tickets_count: :desc)
     #@posts=Post.left_joins(:buys).where('created_at like ?',"%#{params[:content]}%")
     #@posts=Post.where("created_at like ?","2021-03-31%")
-    @posts=Post.all.where('content like ?',"%#{params[:content]}%")
+    #@posts=Post.all.where('content like ?',"%#{params[:content]}%")
     @posts_new=Post.all.order(created_at: :desc).limit(3)
   end
 
@@ -70,8 +70,9 @@ class PostsController < ApplicationController
     @count_all=Ticket.where(post_id:@ticket.post_id,phonenumber:@ticket.phonenumber).count
     day=Date.today.to_s[0,7]
     #@count_month=Ticket.where(post_id:@ticket.post_id,phonenumber:@ticket.phonenumber).where('created_at like ?',"%#{day}%").count
-    @count_month=Ticket.where('created_at like ?',"%2021-04%")
-    #@count_month=Ticket.where(id:1).count
+    #@count_month=Ticket.where('created_at like ?',"%2021-04%")
+    @count_month=Ticket.where('created_at >=', Time.zone.parse('2021-04-01')).count
+        #@count_month=Ticket.where(id:1).count
 
   end
 
