@@ -6,6 +6,7 @@ class PostsController < ApplicationController
     #@posts=Post.left_joins(:buys).where('created_at like ?',"%#{params[:content]}%")
     #@posts=Post.where("created_at like ?","2021-03-31%")
     @posts=Post.all.where('content like ?',"%#{params[:content]}%")
+    @posts_new=Post.all.order(created_at: :desc).limit(3)
   end
 
   def show
