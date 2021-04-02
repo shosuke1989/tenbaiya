@@ -2,10 +2,10 @@ class PostsController < ApplicationController
 
   def index
     @ticket = Ticket.all.order(created_at: :desc)
-    #@posts=Post.left_joins(:tickets).group(:content).select("posts.content,posts.id AS id,COUNT(`tickets`.`id`) AS tickets_count").where('content like ?',"%#{params[:content]}%").order(tickets_count: :desc)
+    @posts=Post.left_joins(:tickets).group(:content).select("posts.content,posts.id AS id,COUNT(`tickets`.`id`) AS tickets_count").where('content like ?',"%#{params[:content]}%").order(tickets_count: :desc)
     #@posts=Post.left_joins(:buys).where('created_at like ?',"%#{params[:content]}%")
     #@posts=Post.where("created_at like ?","2021-03-31%")
-    @posts=Post.all
+    #@posts=Post.all
   end
 
   def show
