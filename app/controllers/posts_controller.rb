@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    sleep(3)
+    sleep(4)
     @post = Post.new(content: params[:content])
     if @post.save
       flash[:notice]="商品を登録しました"
