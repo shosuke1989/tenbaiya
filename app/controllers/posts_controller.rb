@@ -14,8 +14,6 @@ class PostsController < ApplicationController
   def show
     @post=Post.find_by(id:params[:id])
     @post_count=Ticket.where(post_id:params[:id]).count
-
-
   end
 
   def new
@@ -35,11 +33,11 @@ class PostsController < ApplicationController
   end
 
   def sending
-    flash[:notice]="SMSを送信しました"
     sleep(3)
     @post=Post.find_by(id: params[:id])
     if params[:phonenumber]==""
       redirect_to("/posts/#{@post.id}")
+      #番号じゃない、11桁ない、空白、送れない電話
     else
       @phonenumber=params[:phonenumber]
       @ticket_id=rand(1000000)
@@ -49,6 +47,7 @@ class PostsController < ApplicationController
       @preticket=Preticket.new(ticket_id:@ticket_id)
       @preticket.save
       redirect_to("/posts/#{@post.id}/#{@phonenumber}/#{@preticket.id}/check")
+      flash[:notice]="SMSを送信しました"
     end
   end
 
