@@ -96,9 +96,10 @@ class PostsController < ApplicationController
 
   def used
     @ticket=Ticket.find_by(id:params[:id],ticket_id:params[:ticket_id])
-    @post=Post.find_by(id: @ticket.post_id)
     @ticket.used=1
     @ticket.save
+    @post=Post.find_by(id: @ticket.post_id)
+
     flash[:notice]="チケットを使用しました"
     redirect_to("/posts/#{@ticket.id}/#{@ticket.ticket_id}/ticket")
   end

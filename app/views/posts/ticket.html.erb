@@ -29,7 +29,7 @@
       </div>
     <%else%>
       <div class="ticket-button">
-        <%=link_to("/posts/#{@ticket.id}/used",{method: "post"}) do %>
+        <%=link_to("/posts/#{@ticket.id}/#{@ticket.ticket_id}/used",{method: "post"}) do %>
         <button>チケットを使う</button>
         <%end%>
       </div>

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get "posts/:id/:phonenumber/:preticket_id/check" => "posts#check"
   post "posts/:id/:phonenumber/:preticket_id/input" => "posts#input"
   get "posts/:id/:ticket_id/ticket" => "posts#ticket"
-  post "posts/:id/used" => "posts#used"
+  post "posts/:id/:ticket_id/used" => "posts#used"
 
   post "posts/create" => "posts#create"
 
