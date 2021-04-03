@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get "posts/:id/ticket" => "posts#ticket"
   post "posts/:id/used" => "posts#used"
 
- 
   post "posts/create" => "posts#create"
 
 

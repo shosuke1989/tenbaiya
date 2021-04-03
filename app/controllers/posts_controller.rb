@@ -3,11 +3,11 @@ class PostsController < ApplicationController
   def index
     @ticket = Ticket.all.order(created_at: :desc)
     #@posts=Post.left_joins(:tickets).group(:id).select("posts.content,posts.id AS id,COUNT(`tickets`.`id`) AS tickets_count").where('content like ?',"%#{params[:content]}%").order(tickets_count: :desc)
-    @posts=Post.left_joins(:tickets).group(:id).select("posts.content,COUNT('tickets'.'id') AS tickets_count")
+    #@posts=Post.left_joins(:tickets).group(:id).select("posts.content,COUNT('tickets'.'id') AS tickets_count")
     #@posts=Post.left_joins(:tickets)
     #@posts=Post.left_joins(:buys).where('created_at like ?',"%#{params[:content]}%")
     #@posts=Post.where("created_at like ?","2021-03-31%")
-    #@posts=Post.all.where('content like ?',"%#{params[:content]}%")
+    @posts=Post.all.where('content like ?',"%#{params[:content]}%")
     @posts_new=Post.all.order(created_at: :desc).limit(3)
   end
 
@@ -23,12 +23,14 @@ class PostsController < ApplicationController
   end
 
   def create
+    sleep(3)
     @post = Post.new(content: params[:content])
     if @post.save
-      flash[:notice]="投稿を作成しました"
+      flash[:notice]="商品を登録しました"
       redirect_to("/posts/index")
     else
-      render("posts/new")
+      flash[:notice]="すでに登録されています"
+      redirect_to("/posts/new")
     end
   end
 
@@ -92,12 +94,12 @@ class PostsController < ApplicationController
   end
 
   def findticket
-    #flash[:notice]="投稿を作成しました"
-
     sleep(3)
     if @ticket=Ticket.find_by(ticket_id:params[:ticket_id])
+      flash[:notice]="チケットを検索しました"
       redirect_to("/posts/#{@ticket.id}/ticket")
     else
+      flash[:notice]="チケットが有りませんでした"
       redirect_to("/posts/find")
     end
   end
