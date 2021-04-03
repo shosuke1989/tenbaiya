@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   end
 
   def sending
-    sleep(3)
+    sleep(1)
     @post=Post.find_by(id: params[:id])
     if params[:phonenumber]==""
       redirect_to("/posts/#{@post.id}")
@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   end
 
   def check
-    sleep(3)
+    sleep(1)
     if @preticket=Preticket.find_by(id:params[:preticket_id],phonenumber:params[:phonenumber])
       @post=Post.find_by(id: params[:id])
     else
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   end
 
   def input
-    sleep(3)
+    sleep(1)
     @preticket=Preticket.find_by(id:params[:preticket_id])
     if params[:ticket_id]==@preticket.ticket_id
     @ticket=Ticket.new(post_id:params[:id],phonenumber: params[:phonenumber],ticket_id:params[:ticket_id])
@@ -80,7 +80,7 @@ class PostsController < ApplicationController
   end
 
   def ticket
-    sleep(3)
+    sleep(1)
     if @ticket=Ticket.find_by(id:params[:id],ticket_id:params[:ticket_id])
       @post=Post.find_by(id: @ticket.post_id)
       @count_all=Ticket.where(post_id:@ticket.post_id,phonenumber:@ticket.phonenumber).count
@@ -95,11 +95,11 @@ class PostsController < ApplicationController
   end
 
   def used
+    sleep(1)
     @ticket=Ticket.find_by(id:params[:id],ticket_id:params[:ticket_id])
     @ticket.used=1
     @ticket.save
     @post=Post.find_by(id: @ticket.post_id)
-
     flash[:notice]="チケットを使用しました"
     redirect_to("/posts/#{@ticket.id}/#{@ticket.ticket_id}/ticket")
   end
