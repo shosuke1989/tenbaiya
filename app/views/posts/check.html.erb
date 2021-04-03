@@ -8,9 +8,9 @@
     <p>電話番号</p>
     <p1>　<%=@phonenumber %></p1>
     <p>チケットID＊最終的には表示しない</p>
-    <p1>　<%=@ticket_id.ticket_id %></p1>
+    <p1>　<%=@preticket.ticket_id %></p1>
     </div>
-    <%= form_tag("/posts/#{@post.id}/#{@phonenumber}/#{@ticket_id.ticket_id}/input") do %>
+    <%= form_tag("/posts/#{@post.id}/#{@phonenumber}/#{@preticket.id}/input") do %>
     <div class="form">
       <div class="form-body">
         <% @post.errors.full_messages.each do |message| %>
@@ -19,7 +19,7 @@
           </div>
         <% end %>
         <p>チケットID</p>
-      <input name="ticket_id" value="<%=@ticket_id.ticket_id %>">
+      <input name="ticket_id" value="<%=@preticket.ticket_id %>">
       <input type="submit" value="確定">
       </div>
     </div>

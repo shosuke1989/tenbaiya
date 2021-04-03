@@ -35,6 +35,8 @@ class PostsController < ApplicationController
   end
 
   def sending
+    flash[:notice]="SMSを送信しました"
+    sleep(3)
     @post=Post.find_by(id: params[:id])
     if params[:phonenumber]==""
       redirect_to("/posts/#{@post.id}")
@@ -51,22 +53,27 @@ class PostsController < ApplicationController
   end
 
   def check
-    @ticket_id=Preticket.find_by(id:params[:ticket_id])
+    @preticket=Preticket.find_by(id:params[:preticket_id])
     @post=Post.find_by(id: params[:id])
     @phonenumber=params[:phonenumber]
   end
 
   def input
-    if params[:ticket_id]==params[:ticket_id]
-    @post=Post.find_by(id: params[:id])
+    sleep(3)
+    @preticket=Preticket.find_by(id:params[:preticket_id])
+    if params[:ticket_id]==@preticket.ticket_id
     @ticket=Ticket.new(post_id:params[:id],phonenumber: params[:phonenumber],ticket_id:params[:ticket_id])
       if @ticket.save
         redirect_to("/posts/#{@ticket.id}/ticket")
+        flash[:notice]="チケットが発行されました"
       else
-        #すでに登録されています。
+        @ticket=Ticket.find_by(ticket_id:@preticket.ticket_id)
+        redirect_to("/posts/#{@ticket.id}/ticket")
+        flash[:notice]="チケットがすでに発行されています。"
       end
     else
-      #IDが違います
+      redirect_to("/posts/#{params[:id]}/#{params[:phonenumber]}/#{params[:preticket_id]}/check")
+      flash[:notice]="チケットIDが違います"
     end
   end
 
@@ -86,6 +93,7 @@ class PostsController < ApplicationController
     @post=Post.find_by(id: @ticket.post_id)
     @ticket.used=1
     @ticket.save
+    flash[:notice]="チケットを使用しました"
     redirect_to("/posts/#{@ticket.id}/ticket")
   end
 

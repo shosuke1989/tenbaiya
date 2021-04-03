@@ -22,7 +22,7 @@
       <p>チケット使用日</p>
       <p1>　<%=@ticket.updated_at.in_time_zone('Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分%-S秒")%></p1>
       <div class="ticket-button-used">
-        <%=link_to("/posts/#{@ticket.id}/used",{method: "post"}) do %>
+        <%=link_to("") do %>
         <button>チケット使用済み</button>
         <%end%>
       </div>
