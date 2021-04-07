@@ -68,7 +68,7 @@ class PostsController < ApplicationController
     sleep(1)
     if @preticket=Preticket.find_by(id:params[:preticket_id])
       @post=Post.find_by(id: params[:id])
-      if params[:preticket_ticket_id]!="0"
+      if params[:preticket_ticket_id]!="01"
         @ticekt_ticket_id=params[:preticket_ticket_id]
       end
     else
