@@ -46,7 +46,7 @@ class PostsController < ApplicationController
       end  
       @preticket=Preticket.new(ticket_id:@ticket_id,phonenumber:params[:phonenumber])
       @preticket.save
-      redirect_to("/posts/#{@post.id}/#{@preticket.id}/check")
+      redirect_to("/posts/#{@post.id}/#{@preticket.id}/0/check")
       flash[:notice]="SMSを送信しました"
 
       #countly_number="+81#{params[:phonenumber].to_s[1,10]}"
@@ -91,7 +91,7 @@ class PostsController < ApplicationController
         flash[:notice]="チケットがすでに発行されています。"
       end
     else
-      redirect_to("/posts/#{params[:id]}/#{params[:preticket_id]}/check")
+      redirect_to("/posts/#{params[:id]}/#{params[:preticket_id]}/0/check")
       flash[:notice]="チケットIDが違います"
     end
   end

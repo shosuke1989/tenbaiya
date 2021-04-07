@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
 
   post "posts/:id/sending" => "posts#sending"
-  get "posts/:id/:preticket_id/check" => "posts#check"
+  get "posts/:id/:preticket_id/:preticket_ticket_id/check" => "posts#check"
   post "posts/:id/:phonenumber/:preticket_id/input" => "posts#input"
   get "posts/:id/:ticket_id/ticket" => "posts#ticket"
   post "posts/:id/:ticket_id/used" => "posts#used"
