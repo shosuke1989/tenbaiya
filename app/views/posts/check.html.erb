@@ -11,7 +11,7 @@
     <p>URL＊最終的には表示しない</p>
     <p1>　<%="確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check" %></p1>
     </div>
-    <%= form_tag("/posts/#{@post.id}/#{@preticket.phonenumber}/#{@preticket.id}/input") do %>
+    <%= form_tag("/posts/#{@post.id}/#{@preticket.phonenumber}/#{@preticket.id}//input") do %>
     <div class="form">
       <div class="form-body">
         <% @post.errors.full_messages.each do |message| %>
