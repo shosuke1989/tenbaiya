@@ -32,6 +32,7 @@ class PostsController < ApplicationController
     end
   end
 
+
   def sending
     sleep(1)
     @post=Post.find_by(id: params[:id])
@@ -45,17 +46,33 @@ class PostsController < ApplicationController
       end  
       @preticket=Preticket.new(ticket_id:@ticket_id,phonenumber:params[:phonenumber])
       @preticket.save
-      redirect_to("/posts/#{@post.id}/#{@preticket.phonenumber}/#{@preticket.id}/check")
+      redirect_to("/posts/#{@post.id}/#{@preticket.id}/0/check")
       flash[:notice]="SMSを送信しました"
+
+      #countly_number="+81#{params[:phonenumber].to_s[1,10]}"
+      #client = Twilio::REST::Client.new
+      #client.api.account.messages.create(
+      #  from: Rails.application.credentials.twilio[:TWILIO_PHONE_NUMBER],
+      #  to: countly_number,
+      #  body: "Tenba×Iya\n
+      #  チケットID:#{@preticket.ticket_id}\n
+      #  確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
+      #)
+      #client.api.account.messages.create(from: Rails.application.credentials.twilio[:TWILIO_PHONE_NUMBER],to: "+818064195239",body: "Hello World!")
+
+      #チケットID、電話番号
     end
   end
 
   def check
     sleep(1)
-    if @preticket=Preticket.find_by(id:params[:preticket_id],phonenumber:params[:phonenumber])
+    if @preticket=Preticket.find_by(id:params[:preticket_id])
       @post=Post.find_by(id: params[:id])
+      if params[:preticket_ticket_id]!="0"
+        @ticekt_ticket_id=params[:preticket_ticket_id]
+      end
     else
-      flash[:notice]="電話番号が違います"
+      flash[:notice]="アクセスできません"
       redirect_to("/posts/index")
     end
   end
@@ -74,7 +91,7 @@ class PostsController < ApplicationController
         flash[:notice]="チケットがすでに発行されています。"
       end
     else
-      redirect_to("/posts/#{params[:id]}/#{params[:phonenumber]}/#{params[:preticket_id]}/check")
+      redirect_to("/posts/#{params[:id]}/#{params[:preticket_id]}/0/check")
       flash[:notice]="チケットIDが違います"
     end
   end
@@ -88,6 +105,7 @@ class PostsController < ApplicationController
       @day=Date.today
       @count_month=Ticket.where(post_id:@ticket.post_id,phonenumber:@ticket.phonenumber).where('created_at >= ?', @month).count
       @count_day=Ticket.where(post_id:@ticket.post_id,phonenumber:@ticket.phonenumber).where('created_at >= ?', @day).count
+      @post_count=Ticket.where(post_id:@ticket.post_id).count
     else
       flash[:notice]="チケットIDが違います"
       redirect_to("/posts/index")

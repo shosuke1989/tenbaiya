@@ -9,6 +9,9 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.6'
 gem 'bootstrap-sass', '3.4.1'
 
 gem 'rails-i18n'
+
+gem 'twilio-ruby', '~> 5.26.0'
+gem 'phony_rails'
 # Use sqlite3 as the database for Active Record
 group :development, :test do
   gem 'sqlite3' #do ~ end内部に追加。他のgemは残してください。
