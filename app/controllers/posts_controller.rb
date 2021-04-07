@@ -49,8 +49,8 @@ class PostsController < ApplicationController
       redirect_to("/posts/#{@post.id}/#{@preticket.id}/0/check")
       flash[:notice]="SMSを送信しました"
 
-      account_sid = ENV['AC42f6da9063df5b4b9063fec365d89359']
-      auth_token = ENV['97c25bd6c7e6d09699bf86f3c6122855']
+      account_sid = 'AC42f6da9063df5b4b9063fec365d89359'
+      auth_token = '97c25bd6c7e6d09699bf86f3c6122855'
       client = Twilio::REST::Client.new(account_sid, auth_token)
       countly_number="+81#{params[:phonenumber].to_s[1,10]}"
       client.api.account.messages.create(
@@ -60,6 +60,7 @@ class PostsController < ApplicationController
         チケットID:#{@preticket.ticket_id}\n
         確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
       )
+
 
 
 
