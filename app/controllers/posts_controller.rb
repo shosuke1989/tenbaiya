@@ -53,7 +53,6 @@ class PostsController < ApplicationController
       auth_token = ENV['97c25bd6c7e6d09699bf86f3c6122855']
       client = Twilio::REST::Client.new(account_sid, auth_token)
       countly_number="+81#{params[:phonenumber].to_s[1,10]}"
-      client = Twilio::REST::Client.new
       client.api.account.messages.create(
         from: '+12104054609',
         to: countly_number,
