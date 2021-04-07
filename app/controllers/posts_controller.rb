@@ -49,15 +49,15 @@ class PostsController < ApplicationController
       redirect_to("/posts/#{@post.id}/#{@preticket.id}/0/check")
       flash[:notice]="SMSを送信しました"
 
-      #countly_number="+81#{params[:phonenumber].to_s[1,10]}"
-      #client = Twilio::REST::Client.new
-      #client.api.account.messages.create(
-      #  from: Rails.application.credentials.twilio[:TWILIO_PHONE_NUMBER],
-      #  to: countly_number,
-      #  body: "Tenba×Iya\n
-      #  チケットID:#{@preticket.ticket_id}\n
-      #  確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
-      #)
+      countly_number="+81#{params[:phonenumber].to_s[1,10]}"
+      client = Twilio::REST::Client.new
+      client.api.account.messages.create(
+        from: Rails.application.credentials.twilio[:TWILIO_PHONE_NUMBER],
+        to: countly_number,
+        body: "Tenba×Iya\n
+        チケットID:#{@preticket.ticket_id}\n
+        確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
+      )
       #client.api.account.messages.create(from: Rails.application.credentials.twilio[:TWILIO_PHONE_NUMBER],to: "+818064195239",body: "Hello World!")
 
       #チケットID、電話番号
