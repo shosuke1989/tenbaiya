@@ -4,10 +4,10 @@ class PostsController < ApplicationController
     @ticket = Ticket.all.order(created_at: :desc)
     #@posts=Post.left_joins(:tickets).group(:id).select("posts.content,posts.id AS id,COUNT(`tickets`.`id`) AS tickets_count").where('content like ?',"%#{params[:content]}%").order(tickets_count: :desc)
     #@posts=Post.left_joins(:tickets).group(:id).select("posts.content,COUNT('tickets'.'id') AS tickets_count")
-    #@posts=Post.left_joins(:tickets)
+    @posts=Post.left_joins(:tickets).group(:id)
     #@posts=Post.left_joins(:buys).where('created_at like ?',"%#{params[:content]}%")
     #@posts=Post.where("created_at like ?","2021-03-31%")
-    @posts=Post.all.where('content like ?',"%#{params[:content]}%")
+    #@posts=Post.all.where('content like ?',"%#{params[:content]}%")
     @posts_new=Post.all.order(created_at: :desc).limit(3)
   end
 
