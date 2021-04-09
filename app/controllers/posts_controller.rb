@@ -31,30 +31,35 @@ class PostsController < ApplicationController
   def sending
     sleep(1)
     @post=Post.find_by(id: params[:id])
-    if params[:phonenumber]==""
-      redirect_to("/posts/#{@post.id}")
-      #番号じゃない、11桁ない、空白、送れない電話
-    else
+    @ticket_id=rand(1000000)
+    while Ticket.exists?(ticket_id:@ticket_id)
       @ticket_id=rand(1000000)
-      while Ticket.exists?(ticket_id:@ticket_id)
-        @ticket_id=rand(1000000)
-      end  
-      @preticket=Preticket.new(ticket_id:@ticket_id,phonenumber:params[:phonenumber])
-      @preticket.save
+    end  
+    @preticket=Preticket.new(ticket_id:@ticket_id,phonenumber:params[:phonenumber])
+    if @preticket.save
       redirect_to("/posts/#{@post.id}/#{@preticket.id}/0/check")
       flash[:notice]="SMSを送信しました"
 
-      #account_sid = 'AC42f6da9063df5b4b9063fec365d89359'
-      #auth_token = '97c25bd6c7e6d09699bf86f3c6122855'
-      #client = Twilio::REST::Client.new(account_sid, auth_token)
-      #countly_number="+81#{params[:phonenumber].to_s[1,10]}"
-      #client.api.account.messages.create(
-      #  from: '+12104054609',
-      #  to: countly_number,
-      #  body: "Tenba×Iya\n
-      #  チケットID:#{@preticket.ticket_id}\n
-      #  確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
-      #)
+      account_sid = 'AC42f6da9063df5b4b9063fec365d89359'
+      auth_token = '97c25bd6c7e6d09699bf86f3c6122855'
+      client = Twilio::REST::Client.new(account_sid, auth_token)
+      countly_number="+81#{params[:phonenumber].to_s[1,10]}"
+      client.api.account.messages.create(
+        from: '+12104054609',
+        to: countly_number,
+        body: "Tenba×Iya\n
+        チケットID:#{@preticket.ticket_id}\n
+        確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
+      )
+
+
+
+    else
+      redirect_to("/posts/#{@post.id}")
+      flash[:notice]="SMSが送れませんでした"
+    end
+
+
 
 
 
@@ -72,7 +77,8 @@ class PostsController < ApplicationController
       #client.api.account.messages.create(from: Rails.application.credentials.twilio[:TWILIO_PHONE_NUMBER],to: "+818064195239",body: "Hello World!")
 
       #チケットID、電話番号
-    end
+
+
   end
 
   def check
