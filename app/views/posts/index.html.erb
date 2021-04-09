@@ -21,7 +21,7 @@
     <% @posts.each do |post| %>
       <div class="posts-index-item">
         <%= link_to(post.content,"/posts/#{post.id}") %>
-        <p>(<%= post %>)</p>
+        <p>(<%= post.tickets_count %>)</p>
       </div>
     <% end %>
     </div>
