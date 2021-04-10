@@ -44,18 +44,19 @@ class PostsController < ApplicationController
       auth_token = '03688ba5b62fad9c633a512b13e55c01'
       client = Twilio::REST::Client.new(account_sid, auth_token)
       countly_number="+81#{params[:phonenumber].to_s[1,10]}"
-      if client.api.account.messages.create(
+      client.api.account.messages.create(
         from: '+14152148742',
         to: countly_number,
         body: "Tenba×Iya\n
-        チケットID:#{@preticket.ticket_id}\n
-        確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
-      )
-      else
-        redirect_to("/posts/#{@post.id}")
-        flash[:notice]="SMSが送れませんでした"  
-      end
+        チケットID:#{@preticket.ticket_id}")
+        #確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
+      #)
+      
 
+      #account_sid = 'ACc78f79ace01d40dbe374408c0205431c'
+      #auth_token = '03688ba5b62fad9c633a512b13e55c01'
+      #client = Twilio::REST::Client.new(account_sid, auth_token)
+      #client.api.account.messages.create(from: '+14152148742',to: "+818064195239",body: "Tenba×Iya")
 
 
     else
