@@ -40,8 +40,8 @@ class PostsController < ApplicationController
       redirect_to("/posts/#{@post.id}/#{@preticket.id}/0/check")
       flash[:notice]="SMSを送信しました"
 
-      account_sid = 'ACc78f79ace01d40dbe374408c0205431c'
-      auth_token = '03688ba5b62fad9c633a512b13e55c01'
+      account_sid = ''
+      auth_token = ''
       client = Twilio::REST::Client.new(account_sid, auth_token)
       countly_number="+81#{params[:phonenumber].to_s[1,10]}"
       client.api.account.messages.create(
@@ -53,10 +53,6 @@ class PostsController < ApplicationController
       #)
       
 
-      #account_sid = 'ACc78f79ace01d40dbe374408c0205431c'
-      #auth_token = '03688ba5b62fad9c633a512b13e55c01'
-      #client = Twilio::REST::Client.new(account_sid, auth_token)
-      #client.api.account.messages.create(from: '+14152148742',to: "+818064195239",body: "Tenba×Iya")
 
 
     else
