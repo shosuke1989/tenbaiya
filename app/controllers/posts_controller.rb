@@ -50,7 +50,7 @@ class PostsController < ApplicationController
         body: "Tenba×Iya\n
         チケットID:#{@preticket.ticket_id}")
         #確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
-      #)1
+      #)11ßa
       
 
 
