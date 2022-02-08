@@ -37,49 +37,32 @@ class PostsController < ApplicationController
     end  
     @preticket=Preticket.new(ticket_id:@ticket_id,phonenumber:params[:phonenumber])
     if @preticket.save
-      redirect_to("/posts/#{@post.id}/#{@preticket.id}/0/check")
       flash[:notice]="SMSを送信しました"
-
-      account_sid = ''
-      auth_token = ''
+      account_sid = ENV['TWILIO_ACCOUNT_SID']
+      auth_token = ENV['TWILIO_AUTH_TOKEN']
       client = Twilio::REST::Client.new(account_sid, auth_token)
       countly_number="+81#{params[:phonenumber].to_s[1,10]}"
-      client.api.account.messages.create(
-        from: '+14152148742',
-        to: countly_number,
-        body: "Tenba×Iya\n
-        チケットID:#{@preticket.ticket_id}")
-        #確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
-      #)11ßa
-      
 
+      begin
+        client.api.account.messages.create(
+          from: ENV['TWILIO_PHONE_NUMBER'],
+          to: countly_number,
+          body: "Tenba×Iya\n
+          チケットID:#{@preticket.ticket_id}")
+          #確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
+        #)11ßa  
 
+        redirect_to("/posts/#{@post.id}/#{@preticket.id}/0/check")
+
+      rescue
+        redirect_to("/posts/#{@post.id}")
+        flash[:notice]="電話番号が間違っています"
+      end
 
     else
       redirect_to("/posts/#{@post.id}")
       flash[:notice]="SMSが送れませんでした"
     end
-
-
-
-
-
-
-      #countly_number="+81#{params[:phonenumber].to_s[1,10]}"
-      #client = Twilio::REST::Client.new
-      #client.api.account.messages.create(
-      #  from: Rails.application.credentials.twilio[:TWILIO_PHONE_NUMBER],
-      #  to: countly_number,
-      #  body: "Tenba×Iya\n
-      #  チケットID:#{@preticket.ticket_id}\n
-      #  確認画面URL:https://tenba-iya.herokuapp.com/posts/#{@post.id}/#{@preticket.id}/#{@preticket.ticket_id}/check"
-      #)
-
-      #client.api.account.messages.create(from: Rails.application.credentials.twilio[:TWILIO_PHONE_NUMBER],to: "+818064195239",body: "Hello World!")
-
-      #チケットID、電話番号
-
-
   end
 
   def check
